@@ -1,18 +1,47 @@
-# Environments
+# -------------------------
+# ENVIRONMENTS
+# -------------------------
 .env
-.envscto
+.env.*
 env/
 venv/
 ENV/
 
-# Python
+# -------------------------
+# PYTHON
+# -------------------------
 __pycache__/
 *.py[cod]
 *$py.class
+*.so
 
-# Databases
+# -------------------------
+# DJANGO
+# -------------------------
 db.sqlite3
+staticfiles/
+media/
 
-# OS
+# -------------------------
+# LOGS
+# -------------------------
+*.log
+
+# -------------------------
+# COVERAGE / TESTING
+# -------------------------
+.coverage
+htmlcov/
+.pytest_cache/
+
+# -------------------------
+# OS FILES
+# -------------------------
 .DS_Store
 Thumbs.db
+
+# -------------------------
+# IDEs
+# -------------------------
+.vscode/
+.idea/
