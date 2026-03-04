@@ -12,9 +12,14 @@ caficultura, comunidad afro, turismo rural y la cultura del café especial en Co
 {% block extra_head %}
 {% if banner.imagen_fondo %}
 {% webp_url banner.imagen_fondo.url as banner_webp %}
-<link rel="preload" as="image" href="{{ banner_webp }}" fetchpriority="high">
+{% get_srcset banner_webp as banner_srcset %}
+<link rel="preload" as="image" href="{{ banner_webp }}" imagesrcset="{{ banner_srcset }}" imagesizes="100vw"
+    fetchpriority="high">
 {% else %}
-<link rel="preload" as="image" href="{% static 'img/bienvenidos.webp' %}" fetchpriority="high">
+{% static 'img/bienvenidos.webp' as banner_webp %}
+{% get_srcset banner_webp as banner_srcset %}
+<link rel="preload" as="image" href="{% version_url banner_webp 1200 %}" imagesrcset="{{ banner_srcset }}"
+    imagesizes="100vw" fetchpriority="high">
 {% endif %}
 
 <!-- JSON-LD Structured Data for LocalBusiness -->
@@ -80,7 +85,7 @@ diversidad cultural en el norte del Cauca.{% endblock %}
     {% get_srcset hero_img as hero_srcset %}
     <img src="{{ hero_src }}" srcset="{{ hero_srcset }}" sizes="100vw"
         alt="Paisaje de caficultura en Suárez, Cauca - Norte del Cauca" class="hero-bg-img" fetchpriority="high"
-        loading="eager" width="1920" height="1080">
+        loading="eager" width="1920" height="1080" style="object-position: center;">
     <div class="hero-overlay"></div>
 
     <!-- Content Layer -->
