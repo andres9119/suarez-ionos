@@ -17,9 +17,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY') or secrets.token_urlsafe(50)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', 'True') == 'True'
-
-ALLOWED_HOSTS = [host for host in os.getenv('ALLOWED_HOSTS', '').split(',') if host]
+#DEBUG = os.getenv('DEBUG', 'True') == 'True'
+DEBUG = False
+ALLOWED_HOSTS = [
+    "209.46.120.254",
+    "caficulturasuarez.com",
+    "www.caficulturasuarez.com",
+    "127.0.0.1",
+]
 
 
 # Application definition
@@ -138,18 +143,11 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'  # Para producción
 
 # WhiteNoise configuration
 WHITENOISE_MAX_AGE = 31536000  # 1 año
-WHITENOISE_MANIFEST_STRICT = False
-WHITENOISE_KEEP_ONLY_HASHED_FILES = True
+WHITENOISE_MANIFEST_STRICT = True
+WHITENOISE_KEEP_ONLY_HASHED_FILES = False
 
 
-STORAGES = {
-    "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
-    },
-    "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-    },
-}
+STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
@@ -201,7 +199,7 @@ SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
 
 # --- PRODUCCIÓN VPS ---
-SECURE_SSL_REDIRECT = not DEBUG
+SECURE_SSL_REDIRECT = False
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Protección adicional
@@ -230,7 +228,7 @@ CONTENT_SECURITY_POLICY = {
         'connect-src': ["'self'", "https://www.google-analytics.com", "https://stats.g.doubleclick.net", "https://cdn.jsdelivr.net"],
     }
 }
-CSP_INCLUDE_NONCE_IN = ["script-src"] # Solo scripts necesitan nonce estricto, styles necesitan permitir atributos style=""
+CSP_INCLUDE_NONCE_IN = []
 
 LOGGING = {
     'version': 1,

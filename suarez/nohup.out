@@ -1,0 +1,24 @@
+[2026-03-02 10:17:25 +0000] [20236] [INFO] Starting gunicorn 23.0.0
+[2026-03-02 10:17:25 +0000] [20236] [INFO] Listening at: http://127.0.0.1:8000 (20236)
+[2026-03-02 10:17:25 +0000] [20236] [INFO] Using worker: sync
+[2026-03-02 10:17:25 +0000] [20238] [INFO] Booting worker with pid: 20238
+[2026-03-02 10:17:25 +0000] [20239] [INFO] Booting worker with pid: 20239
+[2026-03-02 10:17:25 +0000] [20240] [INFO] Booting worker with pid: 20240
+/home/andres/apps/venv/lib/python3.12/site-packages/django/core/handlers/base.py:62: UserWarning: No directory at: /home/andres/apps/suarez/suarez/staticfiles/
+  mw_instance = middleware(adapted_handler)
+/home/andres/apps/venv/lib/python3.12/site-packages/django/core/handlers/base.py:62: UserWarning: No directory at: /home/andres/apps/suarez/suarez/staticfiles/
+  mw_instance = middleware(adapted_handler)
+/home/andres/apps/venv/lib/python3.12/site-packages/django/core/handlers/base.py:62: UserWarning: No directory at: /home/andres/apps/suarez/suarez/staticfiles/
+  mw_instance = middleware(adapted_handler)
+[2026-03-02 10:18:02 +0000] [20265] [INFO] Starting gunicorn 23.0.0
+[2026-03-02 10:18:02 +0000] [20265] [ERROR] Connection in use: ('127.0.0.1', 8000)
+[2026-03-02 10:18:02 +0000] [20265] [ERROR] connection to ('127.0.0.1', 8000) failed: [Errno 98] Address already in use
+[2026-03-02 10:18:03 +0000] [20265] [ERROR] Connection in use: ('127.0.0.1', 8000)
+[2026-03-02 10:18:03 +0000] [20265] [ERROR] connection to ('127.0.0.1', 8000) failed: [Errno 98] Address already in use
+[2026-03-02 10:18:04 +0000] [20265] [ERROR] Connection in use: ('127.0.0.1', 8000)
+[2026-03-02 10:18:04 +0000] [20265] [ERROR] connection to ('127.0.0.1', 8000) failed: [Errno 98] Address already in use
+[2026-03-02 10:18:05 +0000] [20265] [ERROR] Connection in use: ('127.0.0.1', 8000)
+[2026-03-02 10:18:05 +0000] [20265] [ERROR] connection to ('127.0.0.1', 8000) failed: [Errno 98] Address already in use
+[2026-03-02 10:18:06 +0000] [20265] [ERROR] Connection in use: ('127.0.0.1', 8000)
+[2026-03-02 10:18:06 +0000] [20265] [ERROR] connection to ('127.0.0.1', 8000) failed: [Errno 98] Address already in use
+[2026-03-02 10:18:07 +0000] [20265] [ERROR] Can't connect to ('127.0.0.1', 8000)
