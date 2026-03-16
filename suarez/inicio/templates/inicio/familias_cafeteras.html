@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Familias cafeteras de Suárez Cauca – Vida rural y cultura cafetera{% endblock %}
+
+{% block meta_description %}Conoce a las familias cafeteras de Suárez, Cauca: vida rural, tradición cafetera y trabajo comunitario en las montañas del norte del Cauca.{% endblock %}
+
+{% block meta_keywords %}familias cafeteras de suarez,caficultura del cauca,productores de cafe en suarez,vida rural cafeteros,cultura cafetera del cauca,turismo rural suarez cauca{% endblock %}
+
+{% block og_title %}Familias cafeteras en Suárez Cauca – Corazón de la caficultura del Cauca{% endblock %}
+{% block og_description %}Historias de familias cafeteras en Suárez, Cauca: trabajo en las fincas, recolección de café y cultura cafetera del Cauca.{% endblock %}
+
+{% block extra_head %}
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Caficultura Suárez">
+<link rel="canonical" href="{{ request.build_absolute_uri }}">
+{% endblock %}
+
+{% block content %}
+<section class="section-padding bg-light animate-fade-static">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <nav aria-label="breadcrumb" class="mb-4">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="{% url 'inicio:home' %}" class="text-decoration-none">Inicio</a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">Familias cafeteras</li>
+                    </ol>
+                </nav>
+
+                <h1 class="display-3 fw-bold mb-4 text-primary">
+                    Familias cafeteras de Suárez Cauca
+                </h1>
+
+                <p class="lead fs-4 mb-5">
+                    Las <strong>familias cafeteras de Suárez</strong> son el corazón de la
+                    <strong>caficultura del Cauca</strong>. En cada vereda, en cada finca, se tejen historias de
+                    trabajo, resistencia y esperanza alrededor del café.
+                </p>
+
+                <article class="content-rich shadow-sm p-4 p-md-5 bg-white rounded-4 leading-relaxed">
+                    <h2 class="h2 fw-bold mt-2 mb-4 text-navy">Vida rural en las montañas cafeteras</h2>
+                    <p>
+                        La vida diaria de las <strong>familias cafeteras de Suárez Cauca</strong> comienza antes
+                        del amanecer. Mientras la neblina cubre las montañas, los hogares se preparan para ir al
+                        cafetal: revisar los cultivos, cuidar los árboles de sombra y planear las labores del día.
+                    </p>
+                    <p>
+                        En estas fincas se combinan saberes ancestrales con técnicas modernas. Muchos
+                        <strong>productores de café en Suárez</strong> han incorporado prácticas agroecológicas,
+                        diversificación de cultivos y manejo responsable del agua, asegurando que la
+                        <strong>cultura cafetera del Cauca</strong> siga viva para las próximas generaciones.
+                    </p>
+
+                    <h2 class="h2 fw-bold mt-5 mb-4 text-navy">Trabajo en las fincas y recolección de café</h2>
+                    <p>
+                        Durante la cosecha, la finca se llena de movimiento. Hombres, mujeres, jóvenes y personas
+                        mayores participan en la recolección manual del grano maduro. Es un trabajo paciente, que
+                        requiere cuidado para seleccionar solo las cerezas en su punto exacto de maduración.
+                    </p>
+                    <p>
+                        Este trabajo en las fincas no solo genera ingresos. También fortalece el tejido social,
+                        porque muchas familias se organizan en grupos de apoyo, comparten mano de obra y se ayudan
+                        mutuamente en los momentos de mayor demanda. Así se construye comunidad alrededor del café.
+                    </p>
+
+                    <h2 class="h2 fw-bold mt-5 mb-4 text-navy">Cultura cafetera del Cauca y tejido comunitario</h2>
+                    <p>
+                        La <strong>cultura cafetera del Cauca</strong> se expresa en las fiestas comunitarias, en
+                        las reuniones en las plazas y en las conversaciones alrededor de una taza de
+                        <strong>café especial del Cauca</strong>. En Suárez, la identidad cafetera se mezcla con
+                        raíces afro, indígenas y campesinas, creando una riqueza cultural única.
+                    </p>
+                    <p>
+                        Muchas familias participan en asociaciones, cooperativas y procesos de formación técnica.
+                        A través de estos espacios, se impulsa el liderazgo juvenil, la participación de las
+                        mujeres en la cadena del café y la búsqueda de mejores condiciones para quienes producen
+                        <strong>café especial colombiano</strong>.
+                    </p>
+
+                    <h2 class="h2 fw-bold mt-5 mb-4 text-navy">Familias cafeteras y turismo rural en Suárez Cauca</h2>
+                    <p>
+                        El <strong>turismo rural en Suárez Cauca</strong> ha permitido que las familias cafeteras
+                        compartan su día a día con visitantes de otros municipios y países. En las fincas se abren
+                        espacios para recorridos por los cafetales, demostraciones de beneficio y degustaciones de
+                        café.
+                    </p>
+                    <p>
+                        Estas actividades generan ingresos complementarios y, al mismo tiempo, fortalecen el
+                        orgullo por la <strong>caficultura del Cauca</strong>. Quien visita una finca cafetera en
+                        Suárez no solo conoce un cultivo: conoce una forma de vida basada en el respeto por la
+                        tierra y la colaboración comunitaria.
+                    </p>
+
+                    <p class="mt-5 pt-3 border-top italic text-muted">
+                        Detrás de cada taza de <strong>café de Suárez Cauca</strong> hay una familia, una historia
+                        y un territorio que resiste. Reconocer el valor de las <strong>familias cafeteras de
+                            Suárez</strong> es el primer paso para construir un futuro más justo para el campo
+                        colombiano.
+                    </p>
+                </article>
+
+                <div class="mt-5 text-center">
+                    <a href="{% url 'experiencias_cafeteras:lista' %}"
+                        class="btn btn-outline-primary btn-lg rounded-pill px-5 fw-bold me-3">
+                        Ver experiencias cafeteras
+                    </a>
+                    <a href="{% url 'inicio:home' %}"
+                        class="btn btn-outline-secondary btn-lg rounded-pill px-5 fw-bold mt-3 mt-md-0">
+                        Volver al inicio
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+

@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Café de Suárez Cauca – Café especial del norte del Cauca{% endblock %}
+
+{% block meta_description %}Conoce el café de Suárez, Cauca: un café especial del norte del Cauca cultivado por familias cafeteras que cuidan cada grano desde la montaña hasta la taza.{% endblock %}
+
+{% block meta_keywords %}café de suarez cauca,café del cauca,café especial del cauca,café especial colombiano,caficultura del cauca,productores de café en suarez{% endblock %}
+
+{% block og_title %}Café de Suárez Cauca – Tradición de café especial en el Cauca{% endblock %}
+{% block og_description %}Descubre por qué el café de Suárez, Cauca, es reconocido como café especial del Cauca: clima, altura, familias cafeteras y procesos artesanales.{% endblock %}
+
+{% block extra_head %}
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Caficultura Suárez">
+<link rel="canonical" href="{{ request.build_absolute_uri }}">
+{% endblock %}
+
+{% block content %}
+<section class="section-padding bg-light animate-fade-static">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <nav aria-label="breadcrumb" class="mb-4">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="{% url 'inicio:home' %}" class="text-decoration-none">Inicio</a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">Café de Suárez Cauca</li>
+                    </ol>
+                </nav>
+
+                <h1 class="display-3 fw-bold mb-4 text-primary">
+                    Café de Suárez Cauca: tradición cafetera del norte del Cauca
+                </h1>
+
+                <p class="lead fs-4 mb-5">
+                    El <strong>café de Suárez Cauca</strong> nace en un territorio de montañas, neblina suave
+                    y suelos fértiles. Aquí, en el <strong>norte del Cauca</strong>, las familias productoras
+                    cultivan un <strong>café especial del Cauca</strong> que refleja historia, resistencia y amor
+                    por la tierra.
+                </p>
+
+                <article class="content-rich shadow-sm p-4 p-md-5 bg-white rounded-4 leading-relaxed">
+                    <h2 class="h2 fw-bold mt-2 mb-4 text-navy">Geografía ideal para café especial del Cauca</h2>
+                    <p>
+                        Suárez se ubica entre montañas que alcanzan más de 1.800 metros sobre el nivel del mar.
+                        Esta altitud, unida a temperaturas templadas y lluvias equilibradas, crea el ambiente
+                        perfecto para producir <strong>café del Cauca</strong> con perfiles de taza complejos,
+                        acidez balanceada y notas dulces naturales.
+                    </p>
+                    <p>
+                        Gracias a estas condiciones, el <strong>café de Suárez Cauca</strong> destaca dentro del
+                        mapa del <strong>café especial colombiano</strong>. Cada lote que se produce en las fincas
+                        familiares conserva la identidad del territorio: aromas limpios, dulzor pronunciado y
+                        sabores que recuerdan a frutas maduras, panela y chocolate.
+                    </p>
+
+                    <h2 class="h2 fw-bold mt-5 mb-4 text-navy">Familias cafeteras y caficultura del Cauca</h2>
+                    <p>
+                        La <strong>caficultura del Cauca</strong> en Suárez está en manos de pequeñas y medianas
+                        fincas. Son <strong>productores de café en Suárez</strong>, familias que combinan
+                        conocimiento ancestral con buenas prácticas agrícolas modernas: manejo responsable del
+                        suelo, conservación de fuentes hídricas y cultivo bajo sombra.
+                    </p>
+                    <p>
+                        Muchas de estas familias hacen parte de organizaciones y asociaciones locales que buscan
+                        mejorar el ingreso del productor, acceder a mercados de
+                        <strong>café especial colombiano</strong> y posicionar el nombre de Suárez como origen
+                        diferenciado. Si quieres conocer historias de estas familias, visita la sección de
+                        <a href="{% url 'experiencias_cafeteras:lista' %}" class="text-primary fw-bold text-decoration-none">
+                            experiencias cafeteras
+                        </a>.
+                    </p>
+
+                    <h2 class="h2 fw-bold mt-5 mb-4 text-navy">Procesos artesanales y calidad en taza</h2>
+                    <p>
+                        El <strong>café especial del Cauca</strong> que se produce en Suárez pasa por procesos
+                        cuidadosamente controlados: recolección manual de cerezas maduras, despulpado oportuno,
+                        fermentaciones cuidadas y secado al sol en camas elevadas o marquesinas. Todo esto se
+                        traduce en tazas limpias y dulces, con perfiles que pueden puntuar como
+                        <em>cafés de especialidad</em>.
+                    </p>
+                    <p>
+                        En muchas fincas se trabaja con variedades como Castillo, Caturra y Colombia, adaptadas
+                        al clima del <strong>norte del Cauca</strong>. Los productores experimentan con procesos
+                        lavados, honey y naturales que aportan diversidad de sabores para compradores nacionales e
+                        internacionales.
+                    </p>
+
+                    <h2 class="h2 fw-bold mt-5 mb-4 text-navy">Café de Suárez Cauca y turismo cafetero</h2>
+                    <p>
+                        El <strong>café de Suárez Cauca</strong> también es puerta de entrada al
+                        <strong>turismo cafetero en el Cauca</strong>. Cada vez más visitantes llegan al
+                        territorio para conocer el proceso completo: caminar por los cafetales, participar en la
+                        recolección, visitar los beneficios y aprender a catar café.
+                    </p>
+                    <p>
+                        Estas experiencias fortalecen el vínculo entre productor y consumidor, y ayudan a valorar
+                        el trabajo de las <strong>familias cafeteras de Suárez</strong>. Si te interesa este
+                        tipo de recorrido, te invitamos a explorar la sección de
+                        <a href="{% url 'experiencias_cafeteras:lista' %}" class="text-primary fw-bold text-decoration-none">
+                            cultura cafetera
+                        </a> y nuestras
+                        <a href="{% url 'comunidades:lista' %}" class="text-primary fw-bold text-decoration-none">
+                            comunidades
+                        </a>.
+                    </p>
+
+                    <p class="mt-5 pt-3 border-top italic text-muted">
+                        El <strong>café de Suárez Cauca</strong> es más que un producto: es identidad,
+                        territorio y futuro. Cada taza es una invitación a conocer el trabajo silencioso de
+                        quienes cultivan <strong>café especial colombiano</strong> en el corazón del norte del
+                        Cauca.
+                    </p>
+                </article>
+
+                <div class="mt-5 text-center">
+                    <a href="{% url 'inicio:home' %}"
+                        class="btn btn-outline-primary btn-lg rounded-pill px-5 fw-bold">
+                        <i class="bi bi-arrow-left me-2"></i>Volver al inicio
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+

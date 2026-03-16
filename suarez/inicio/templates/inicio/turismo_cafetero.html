@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Turismo cafetero en Suárez Cauca – Experiencias de café y paisaje{% endblock %}
+
+{% block meta_description %}Explora el turismo cafetero en Suárez, Cauca: visitas a fincas, experiencia del café, senderos rurales y cultura local en el norte del Cauca.{% endblock %}
+
+{% block meta_keywords %}turismo cafetero en cauca,turismo cafetero suarez cauca,café de suarez cauca,experiencias de café,agroturismo cafetero,cultura cafetera del cauca{% endblock %}
+
+{% block og_title %}Turismo cafetero en Suárez Cauca – Café, paisaje y cultura{% endblock %}
+{% block og_description %}Conoce el turismo cafetero en Suárez, Cauca: rutas de café, visitas a fincas y cultura cafetera del norte del Cauca.{% endblock %}
+
+{% block extra_head %}
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Caficultura Suárez">
+<link rel="canonical" href="{{ request.build_absolute_uri }}">
+{% endblock %}
+
+{% block content %}
+<section class="section-padding bg-light animate-fade-static">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <nav aria-label="breadcrumb" class="mb-4">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="{% url 'inicio:home' %}" class="text-decoration-none">Inicio</a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">Turismo cafetero</li>
+                    </ol>
+                </nav>
+
+                <h1 class="display-3 fw-bold mb-4 text-primary">
+                    Turismo cafetero en Suárez Cauca
+                </h1>
+
+                <p class="lead fs-4 mb-5">
+                    El <strong>turismo cafetero en Suárez Cauca</strong> ofrece una experiencia auténtica:
+                    caminar entre cafetales, compartir con las familias productoras y disfrutar de los paisajes
+                    del <strong>norte del Cauca</strong> mientras se descubre el origen del café.
+                </p>
+
+                <article class="content-rich shadow-sm p-4 p-md-5 bg-white rounded-4 leading-relaxed">
+                    <h2 class="h2 fw-bold mt-2 mb-4 text-navy">Visitas a fincas cafeteras</h2>
+                    <p>
+                        Una de las formas más valiosas de vivir el <strong>turismo cafetero en el Cauca</strong>
+                        es visitar directamente las fincas. En Suárez, muchas familias abren las puertas de sus
+                        parcelas para mostrar cómo se cultiva el <strong>café de Suárez Cauca</strong>, desde la
+                        siembra hasta la cosecha.
+                    </p>
+                    <p>
+                        En estas visitas se aprende sobre variedades de café, sistemas de sombra, conservación
+                        del suelo y técnicas de beneficio. Los visitantes pueden dialogar con los productores,
+                        conocer sus historias y comprender el esfuerzo que hay detrás de cada taza de
+                        <strong>café especial colombiano</strong>.
+                    </p>
+
+                    <h2 class="h2 fw-bold mt-5 mb-4 text-navy">Experiencia del café: de la cereza a la taza</h2>
+                    <p>
+                        Las rutas de <strong>turismo cafetero en Suárez Cauca</strong> suelen incluir una
+                        experiencia completa del café. Primero se recorren los cafetales, luego se observa el
+                        proceso de despulpado, fermentación y secado, y finalmente se realiza una cata guiada
+                        para descubrir aromas, sabores y texturas.
+                    </p>
+                    <p>
+                        Esta <em>experiencia del café</em> permite que las personas entiendan por qué el
+                        <strong>café del Cauca</strong> tiene tanto reconocimiento. Al conectar el paisaje, el
+                        trabajo humano y el resultado en la taza, se fortalece el valor del producto y el
+                        respeto por las <strong>familias cafeteras de Suárez</strong>.
+                    </p>
+
+                    <h2 class="h2 fw-bold mt-5 mb-4 text-navy">Paisajes, senderos y cultura local</h2>
+                    <p>
+                        Además del café, el <strong>turismo cafetero en el Cauca</strong> incluye caminatas por
+                        senderos rurales, miradores naturales y recorridos por veredas donde se respira
+                        tranquilidad. Ríos, montañas y bosques rodean las zonas cafeteras de Suárez, creando
+                        escenarios ideales para la fotografía y la contemplación.
+                    </p>
+                    <p>
+                        La <strong>cultura cafetera del Cauca</strong> también se expresa en la gastronomía
+                        local, la música, las fiestas patronales y los espacios comunitarios donde se comparte
+                        el café. Participar en estas actividades es una forma de conocer la identidad del
+                        territorio desde el respeto y la cercanía.
+                    </p>
+
+                    <h2 class="h2 fw-bold mt-5 mb-4 text-navy">Cómo conectar con las experiencias cafeteras</h2>
+                    <p>
+                        Si te interesa el <strong>turismo cafetero en Suárez Cauca</strong>, puedes iniciar tu
+                        recorrido explorando la sección de
+                        <a href="{% url 'experiencias_cafeteras:lista' %}"
+                            class="text-primary fw-bold text-decoration-none">experiencias cafeteras</a>, donde se
+                        destacan historias y procesos de diferentes fincas del municipio.
+                    </p>
+                    <p>
+                        También puedes contactar a la administración municipal a través del formulario de
+                        <a href="{% url 'contacto:index' %}" class="text-primary fw-bold text-decoration-none">
+                            contacto
+                        </a>
+                        para conocer iniciativas de <strong>turismo rural</strong> y proyectos que vinculan café,
+                        comunidad y desarrollo sostenible.
+                    </p>
+
+                    <p class="mt-5 pt-3 border-top italic text-muted">
+                        El <strong>turismo cafetero en Suárez Cauca</strong> es una invitación a mirar el café
+                        más allá del producto: como una experiencia que une paisaje, cultura local y esperanza
+                        para las comunidades rurales del norte del Cauca.
+                    </p>
+                </article>
+
+                <div class="mt-5 text-center">
+                    <a href="{% url 'experiencias_cafeteras:lista' %}"
+                        class="btn btn-outline-primary btn-lg rounded-pill px-5 fw-bold me-3">
+                        Ver cultura cafetera
+                    </a>
+                    <a href="{% url 'inicio:home' %}"
+                        class="btn btn-outline-secondary btn-lg rounded-pill px-5 fw-bold mt-3 mt-md-0">
+                        Volver al inicio
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+

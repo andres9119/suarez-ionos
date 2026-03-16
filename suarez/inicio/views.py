@@ -23,6 +23,18 @@ def home(request):
 def historia(request):
     return render(request, 'inicio/historia.html')
 
+
+def cafe_suarez_cauca(request):
+    return render(request, 'inicio/cafe_suarez_cauca.html')
+
+
+def familias_cafeteras(request):
+    return render(request, 'inicio/familias_cafeteras.html')
+
+
+def turismo_cafetero(request):
+    return render(request, 'inicio/turismo_cafetero.html')
+
 def buscar(request):
     query = request.GET.get('q', '')
     filter_type = request.GET.get('type', 'all')
