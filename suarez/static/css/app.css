@@ -254,6 +254,12 @@ img {
     padding: 80px 0 30px;
 }
 
+.footer-premium .footer-gov-logo {
+    height: 40px;
+    width: auto;
+    max-width: none;
+}
+
 .footer-premium h5 {
     color: var(--accent);
     text-transform: uppercase;
