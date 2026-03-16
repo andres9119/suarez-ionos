@@ -13,6 +13,7 @@ class Comunidad(models.Model):
     tipo = models.CharField(max_length=20, choices=TIPO_CHOICES)
     resena_cultural = models.TextField()
     historia = models.TextField()
+    video_url = models.URLField(max_length=500, blank=True, null=True, help_text="Enlace de YouTube o Vimeo")
     logo_o_emblema = OptimizedImageField(upload_to='comunidades/logos/', max_width=400, max_height=400, quality=90, help_text="Logo o emblema de la comunidad")
 
     def save(self, *args, **kwargs):
