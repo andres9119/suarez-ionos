@@ -553,6 +553,18 @@ diversidad cultural en el norte del Cauca.{% endblock %}
             <div class="col-lg-10 col-xl-8">
                 <div class="video-item mb-5 p-4 bg-white rounded-5 shadow-premium">
                     <div class="rounded-4 overflow-hidden shadow-sm bg-black">
+                        {% with platform=video.url_embebida|video_platform %}
+                        {% if platform == 'vimeo' %}
+                        {% with vid_id=video.url_embebida|vimeo_id %}
+                        <div style="padding:56.25% 0 0 0;position:relative;">
+                            <iframe src="https://player.vimeo.com/video/{{ vid_id }}?title=0&byline=0&portrait=0"
+                                style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0"
+                                allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
+                            </iframe>
+                        </div>
+                        <script src="https://player.vimeo.com/api/player.js"></script>
+                        {% endwith %}
+                        {% else %}
                         {% with vid_id=video.url_embebida|youtube_id %}
                         <div class="lite-youtube" data-video-id="{{ vid_id }}"
                             style="background-image: url('https://i.ytimg.com/vi/{{ vid_id }}/hqdefault.jpg');"
@@ -560,14 +572,25 @@ diversidad cultural en el norte del Cauca.{% endblock %}
                             <button type="button" class="lty-playbtn" aria-label="Reproducir Video"></button>
                         </div>
                         {% endwith %}
+                        {% endif %}
+                        {% endwith %}
                     </div>
                     <div class="text-center mt-4">
                         <h3 class="fw-bold text-navy mb-4 h4">{{ video.titulo }}</h3>
                         <div class="d-flex justify-content-center">
+                            {% with platform=video.url_embebida|video_platform %}
+                            {% if platform == 'vimeo' %}
+                            <a href="{{ video.url_embebida }}" target="_blank"
+                                class="btn btn-info btn-lg rounded-pill px-4 shadow-sm fw-bold text-white">
+                                <i class="bi bi-play-circle me-2"></i>Abrir en Vimeo
+                            </a>
+                            {% else %}
                             <a href="{{ video.url_embebida }}" target="_blank"
                                 class="btn btn-danger btn-lg rounded-pill px-4 shadow-sm fw-bold">
                                 <i class="bi bi-youtube me-2"></i>Abrir en YouTube
                             </a>
+                            {% endif %}
+                            {% endwith %}
                         </div>
                     </div>
                 </div>

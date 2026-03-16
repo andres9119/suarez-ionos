@@ -3,17 +3,25 @@ from django import template
 
 register = template.Library()
 
-@register.filter(name='youtube_embed')
-def youtube_embed(url):
-    """
-    Converts any YouTube URL to a high-compatibility embed URL.
-    - Handles watch?v=, youtu.be/, shorts/, live/
-    - Cleans up extra parameters
-    - Returns standard youtube.com/embed/ for maximum browser support
-    """
+@register.filter(name='video_platform')
+def video_platform(url):
+    """Detects if the video is from vimeo or youtube."""
     if not url:
-        return ""
-    
+        return "youtube"
+    if "vimeo.com" in url.lower():
+        return "vimeo"
+    return "youtube"
+
+@register.filter(name='vimeo_id')
+def vimeo_id(url):
+    """Extracts Vimeo video ID."""
+    if not url:
+        return None
+    match = re.search(r"vimeo\.com/(?:video/)?(\d+)", url)
+    if match:
+        return match.group(1)
+    return None
+
 def get_youtube_id(url):
     if not url:
         return None
@@ -50,6 +58,12 @@ def youtube_id(url):
 
 @register.filter(name='youtube_embed')
 def youtube_embed(url):
+    """
+    Converts any YouTube URL to a high-compatibility embed URL.
+    - Handles watch?v=, youtu.be/, shorts/, live/
+    - Cleans up extra parameters
+    - Returns standard youtube.com/embed/ for maximum browser support
+    """
     video_id = get_youtube_id(url)
     if video_id:
         return f"https://www.youtube.com/embed/{video_id}?autoplay=0&rel=0"
