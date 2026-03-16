@@ -9,7 +9,18 @@ class StaticViewSitemap(sitemaps.Sitemap):
     changefreq = 'weekly'
 
     def items(self):
-        return ['inicio:home', 'inicio:historia', 'noticias:lista', 'comunidades:lista', 'experiencias_cafeteras:lista', 'documentos:lista', 'contacto:index']
+        return [
+            'inicio:home',
+            'inicio:historia',
+            'inicio:cafe_suarez_cauca',
+            'inicio:familias_cafeteras',
+            'inicio:turismo_cafetero',
+            'noticias:lista',
+            'comunidades:lista',
+            'experiencias_cafeteras:lista',
+            'documentos:lista',
+            'contacto:index',
+        ]
 
     def location(self, item):
         return reverse(item)
