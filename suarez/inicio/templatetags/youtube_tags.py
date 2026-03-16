@@ -12,23 +12,39 @@ def video_platform(url):
         return "vimeo"
     return "youtube"
 
-@register.filter(name='vimeo_id')
-def vimeo_id(url):
-    """Extracts Vimeo video ID."""
+@register.filter(name='vimeo_embed_url')
+def vimeo_embed_url(url):
+    """Extracts Vimeo video ID and privacy hash (if present) to build the embed URL."""
     if not url:
         return None
-    # Matches URLs like vimeo.com/123456789 or vimeo.com/manage/videos/123456789
-    match = re.search(r"vimeo\.com/.*?(\d{8,11})", url)
-    if match:
-        return match.group(1)
+        
+    video_id = None
+    privacy_hash = None
     
-    # Fallback to just grabbing any block of 8-11 digits if "vimeo" is in the URL
-    if "vimeo" in url.lower():
-        match = re.search(r"/(\d{8,11})(?:/|$|\?)", url)
-        if match:
-            return match.group(1)
+    # 1. Try to find the 8-11 digit ID
+    id_match = re.search(r"(\d{8,11})", url)
+    if id_match:
+        video_id = id_match.group(1)
+        
+    # 2. Try to find an alphanumeric privacy hash (typically 8-10 chars at the end of the URL)
+    # e.g., vimeo.com/123456789/abcdef1234
+    hash_match = re.search(r"\d{8,11}/([a-zA-Z0-9]+)", url)
+    if hash_match:
+        privacy_hash = hash_match.group(1)
+    # Alternatively, it might be passed as a query param ?h=xxx
+    elif "?h=" in url or "&h=" in url:
+        hash_param_match = re.search(r"[?&]h=([a-zA-Z0-9]+)", url)
+        if hash_param_match:
+            privacy_hash = hash_param_match.group(1)
             
-    return None
+    if not video_id:
+        return None
+        
+    embed_url = f"https://player.vimeo.com/video/{video_id}"
+    if privacy_hash:
+        embed_url += f"?h={privacy_hash}"
+        
+    return embed_url
 
 def get_youtube_id(url):
     if not url:
