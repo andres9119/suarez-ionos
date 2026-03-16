@@ -17,9 +17,17 @@ def vimeo_id(url):
     """Extracts Vimeo video ID."""
     if not url:
         return None
-    match = re.search(r"vimeo\.com/(?:video/)?(\d+)", url)
+    # Matches URLs like vimeo.com/123456789 or vimeo.com/manage/videos/123456789
+    match = re.search(r"vimeo\.com/.*?(\d{8,11})", url)
     if match:
         return match.group(1)
+    
+    # Fallback to just grabbing any block of 8-11 digits if "vimeo" is in the URL
+    if "vimeo" in url.lower():
+        match = re.search(r"/(\d{8,11})(?:/|$|\?)", url)
+        if match:
+            return match.group(1)
+            
     return None
 
 def get_youtube_id(url):
