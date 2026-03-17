@@ -3,7 +3,7 @@
 {% block title %}Resultados de búsqueda - Suárez 100% café{% endblock %}
 
 
-{% block meta_description %}Busca noticias, documentos, comunidades y experiencias cafeteras en el portal de Suárez 100%
+{% block meta_description %}Busca noticias, comunidades y experiencias cafeteras en el portal de Suárez 100%
 café
 de Suárez, Cauca. Tu información municipal al alcance.{% endblock %}
 
@@ -44,8 +44,6 @@ de Suárez, Cauca. Tu información municipal al alcance.{% endblock %}
                             class="btn btn-outline-primary btn-sm {% if filter_type == 'experiencias' %}active{% endif %}">Experiencias</a>
                         <a href="?q={{ query }}&type=comunidades"
                             class="btn btn-outline-primary btn-sm {% if filter_type == 'comunidades' %}active{% endif %}">Comunidades</a>
-                        <a href="?q={{ query }}&type=documentos"
-                            class="btn btn-outline-primary btn-sm {% if filter_type == 'documentos' %}active{% endif %}">Documentos</a>
                     </div>
                 </div>
 
@@ -109,27 +107,6 @@ de Suárez, Cauca. Tu información municipal al alcance.{% endblock %}
                 </div>
                 {% endif %}
 
-                <!-- Category: Documentos -->
-                {% if documentos %}
-                <div class="mb-5">
-                    <h2 class="fw-bold text-navy mb-4 pb-2 border-bottom h4"><i
-                            class="bi bi-file-earmark-pdf-fill me-2 text-primary"></i>Documentos Públicos</h2>
-                    {% for item in documentos %}
-                    <div class="card border-0 shadow-sm rounded-4 mb-3 p-3 transition-hover">
-                        <div class="d-flex align-items-center">
-                            <div class="flex-grow-1">
-                                <h3 class="fw-bold mb-1 h5">{{ item.titulo }}</h3>
-                                <span class="badge bg-primary-soft text-primary rounded-pill small">{{
-                                    item.categoria.nombre
-                                    }}</span>
-                            </div>
-                            <a href="{{ item.archivo.url }}" class="btn btn-primary btn-sm rounded-pill ms-3"
-                                download><i class="bi bi-download"></i></a>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-                {% endif %}
             </div>
         </div>
     </div>

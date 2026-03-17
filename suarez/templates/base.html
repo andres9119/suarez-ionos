@@ -103,10 +103,6 @@
                             href="{% url 'experiencias_cafeteras:lista' %}">Cultura Cafetera</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {% if request.resolver_match.app_name == 'documentos' %}active{% endif %}"
-                            href="{% url 'documentos:lista' %}">Documentos</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link {% if request.resolver_match.app_name == 'contacto' %}active{% endif %}"
                             href="{% url 'contacto:index' %}">Contacto</a>
                     </li>
@@ -162,8 +158,6 @@
                 <div class="col-lg-2 col-md-4 ms-auto">
                     <div class="fw-bold h5 mb-3 text-accent text-uppercase" style="letter-spacing: 1.5px;">Gestión</div>
                     <ul class="list-unstyled small opacity-75">
-                        <li class="mb-2"><a href="{% url 'documentos:lista' %}"
-                                class="text-white text-decoration-none hover-accent">Transparencia</a></li>
                         <li class="mb-2"><a href="{% url 'contacto:index' %}"
                                 class="text-white text-decoration-none hover-accent">Atención al Ciudadano (PQRS)</a>
                         </li>

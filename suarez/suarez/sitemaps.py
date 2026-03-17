@@ -18,7 +18,6 @@ class StaticViewSitemap(sitemaps.Sitemap):
             'noticias:lista',
             'comunidades:lista',
             'experiencias_cafeteras:lista',
-            'documentos:lista',
             'contacto:index',
         ]
 

@@ -5,7 +5,6 @@ from django.db.models import Q
 from noticias.models import Noticia
 from experiencias_cafeteras.models import ExperienciaCafetera
 from comunidades.models import Comunidad
-from documentos.models import DocumentoPublico
 
 def home(request):
     banner = BannerPrincipal.objects.filter(activo=True).first()
@@ -42,7 +41,6 @@ def buscar(request):
     resultados_noticias = []
     resultados_cafe = []
     resultados_comul = []
-    resultados_docs = []
     
     if query:
         if filter_type in ['all', 'noticias']:
@@ -59,11 +57,6 @@ def buscar(request):
             resultados_comul = Comunidad.objects.filter(
                 Q(nombre__icontains=query) | Q(resena_cultural__icontains=query)
             )
-            
-        if filter_type in ['all', 'documentos']:
-            resultados_docs = DocumentoPublico.objects.filter(
-                Q(titulo__icontains=query)
-            )
         
     return render(request, 'inicio/buscar.html', {
         'query': query,
@@ -71,7 +64,6 @@ def buscar(request):
         'noticias': resultados_noticias,
         'experiencias': resultados_cafe,
         'comunidades': resultados_comul,
-        'documentos': resultados_docs,
-        'total_resultados': len(resultados_noticias) + len(resultados_cafe) + len(resultados_comul) + len(resultados_docs)
+        'total_resultados': len(resultados_noticias) + len(resultados_cafe) + len(resultados_comul)
     })
 
