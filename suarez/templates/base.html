@@ -91,8 +91,7 @@
                             href="{% url 'inicio:home' %}">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {% if request.resolver_match.app_name == 'noticias' %}active{% endif %}"
-                            href="{% url 'noticias:lista' %}">Noticias</a>
+                        <!-- Enlace 'Noticias' eliminado de la barra superior -->
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {% if request.resolver_match.app_name == 'comunidades' %}active{% endif %}"
@@ -167,8 +166,7 @@
                     <div class="fw-bold h5 mb-3 text-accent text-uppercase" style="letter-spacing: 1.5px;">Servicios
                     </div>
                     <ul class="list-unstyled small opacity-75">
-                        <li class="mb-2"><a href="{% url 'noticias:lista' %}"
-                                class="text-white text-decoration-none">Noticias</a></li>
+                        <!-- Enlace 'Noticias' eliminado del menú lateral -->
                         <li class="mb-2"><a href="{% url 'comunidades:lista' %}"
                                 class="text-white text-decoration-none">Comunidades</a></li>
                         <li class="mb-2"><a href="{% url 'experiencias_cafeteras:lista' %}"
