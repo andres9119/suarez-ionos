@@ -7,10 +7,9 @@
 
 {% block content %}
 <!-- Immersive Story Header -->
-<section class="hero-coffee animate-fade" {% if experiencia.primera_imagen %} {% webp_url
-    experiencia.primera_imagen.url as banner_url %}
+<section class="hero-coffee animate-fade" {% static 'img/banner-cultura-cafe.webp' as banner_static %}{% webp_url banner_static as banner_url %}
     style="background-image:linear-gradient(rgba(0,37,26,0.5),rgba(0,37,26,0.3)),url('{{ banner_url }}'); height:50vh; min-height:400px; padding:100px 0 120px; position:relative;"
-    {% else %} style="height:50vh; min-height:400px; padding:100px 0 120px; position:relative;" {% endif %}>
+>
     <div class="container position-relative z-2" style="margin-top: 40px;">
         <div class="row align-items-end" style="min-height: auto;">
             <div class="col-lg-10">
@@ -42,7 +41,7 @@
         <!-- Description Introduction -->
         {% if experiencia.descripcion_breve %}
         <div class="row mb-5 pb-5 border-bottom">
-            <div class="col-lg-8">
+            <div class="col-lg-9">
                 <div class="content-text fs-5" style="color: #4e342e; line-height: 1.8;">
                     <p class="lead">{{ experiencia.descripcion_breve }}</p>
                 </div>
@@ -56,7 +55,7 @@
                 {% if bloque.tipo == 'texto' %}
                 <!-- Text Block -->
                 <div class="row mb-5 pb-5 border-bottom">
-                    <div class="col-lg-8">
+                    <div class="col-lg-9">
                         <div class="pe-lg-5">
                             {% if bloque.titulo_texto %}
                             <h2 class="section-title mb-4">{{ bloque.titulo_texto }}</h2>
@@ -71,7 +70,7 @@
                 {% elif bloque.tipo == 'video' %}
                 <!-- Video Block -->
                 <div class="row mb-5 pb-5 justify-content-center">
-                    <div class="col-lg-8">
+                    <div class="col-lg-9">
                         {% if bloque.titulo_texto %}
                         <h2 class="section-title mb-4">{{ bloque.titulo_texto }}</h2>
                         {% endif %}
@@ -90,7 +89,7 @@
                 {% elif bloque.tipo == 'imagen' %}
                 <!-- Image Block -->
                 <div class="row mb-5 pb-5 justify-content-center">
-                    <div class="col-lg-8">
+                    <div class="col-lg-9">
                         <div class="rounded-5 overflow-hidden shadow-lg">
                             {% webp_url bloque.imagen.url as img_url %}
                             {% version_url bloque.imagen.url as versioned_url %}
