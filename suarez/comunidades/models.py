@@ -34,6 +34,21 @@ class ImagenComunidad(models.Model):
         return f"Imagen de {self.comunidad.nombre}"
 
 
+class SeccionTexto(models.Model):
+    titulo = models.CharField(max_length=200)
+    contenido = models.TextField()
+    orden = models.IntegerField(default=0, help_text="Orden de presentación (menor número = primero)")
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['orden', '-fecha_creacion']
+        verbose_name = "Sección de Texto"
+        verbose_name_plural = "Secciones de Texto"
+
+    def __str__(self):
+        return f"{self.orden}. {self.titulo}"
+
+
 class GaleriaMunicipio(models.Model):
     titulo = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=False, blank=True, null=True)
@@ -45,6 +60,8 @@ class GaleriaMunicipio(models.Model):
 
     class Meta:
         ordering = ['orden', '-fecha_creacion']
+        verbose_name = "Imagen Galería"
+        verbose_name_plural = "Galería de Imágenes"
 
     def save(self, *args, **kwargs):
         if not self.slug:
