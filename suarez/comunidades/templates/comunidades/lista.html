@@ -2,84 +2,59 @@
 {% load static %}
 {% load image_utils %}
 
-{% block title %}Comunidades de Suárez, Cauca - Diversidad Étnica y Cultural{% endblock %}
+{% block title %}Galería del Municipio de Suárez, Cauca{% endblock %}
 
-{% block meta_description %}Conoce las comunidades afrodescendientes e indígenas de Suárez, Cauca. Riqueza cultural en
-el norte del Cauca, tradiciones ancestrales y patrimonio social.{% endblock %}
+{% block meta_description %}Galería de imágenes del Municipio de Suárez, Cauca. Explora la belleza de nuestro territorio, paisajes cafeteros y patrimonio natural.{% endblock %}
 
 {% block content %}
 <div class="hero-institution animate-fade-static bg-comunidades-hero"
     style="min-height: 480px; padding: 100px 0 120px; position: relative; background-color: var(--navy);">
     <div class="container text-center position-relative z-2">
-        <span class="badge bg-accent text-navy mb-3 px-3 py-2 rounded-pill fw-bold text-uppercase shadow-sm">Nuestra
-            Gente</span>
+        <span class="badge bg-accent text-navy mb-3 px-3 py-2 rounded-pill fw-bold text-uppercase shadow-sm">Galería</span>
         <h1 class="fw-extrabold mb-3 text-white" style="font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1.1;">
-            Comunidades de Suárez, Cauca</h1>
+            Galería del Municipio</h1>
 
         <!-- Breadcrumbs -->
         <nav aria-label="breadcrumb" class="d-flex justify-content-center mb-4">
             <ol class="breadcrumb mb-0">
                 <li class="breadcrumb-item"><a href="{% url 'inicio:home' %}"
                         class="text-white text-decoration-none opacity-75 hover-accent">Inicio</a></li>
-                <li class="breadcrumb-item active text-white" aria-current="page">Comunidades</li>
+                <li class="breadcrumb-item active text-white" aria-current="page">Galería</li>
             </ol>
         </nav>
 
-        <p class="lead text-white fs-4 fw-medium opacity-90 col-md-9 mx-auto">Suárez, Cauca, es un territorio de
-            diversidad cultural donde convergen comunidades indígenas,
-            afrodescendientes y campesinas que construyen identidad, tradición y desarrollo en el norte del departamento
-            del Cauca.</p>
+        <p class="lead text-white fs-4 fw-medium opacity-90 col-md-9 mx-auto">Descubre la belleza natural, cultural y paisajística de Suárez, Cauca. Un recorrido visual por nuestro territorio cafetero, nuestras comunidades y los elementos que definen nuestra identidad.</p>
     </div>
-
-
 </div>
 
 <div class="py-5" {% static 'img/comunidadesfondo.jpg' as bg_img_uri %} {% webp_url bg_img_uri as bg_img %}
     style="background: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url('{{ bg_img }}'); background-size: cover; background-position: center; background-attachment: fixed;">
     <div class="container section-padding">
         <div class="row g-4 justify-content-center">
-            {% for comunidad in comunidades %}
+            {% for imagen in galeria %}
             <div class="col-lg-4 col-md-6">
-                <div class="card h-100 text-center border-0 shadow-premium rounded-5 p-4 p-xl-5 transition-hover"
+                <div class="card h-100 overflow-hidden border-0 shadow-premium rounded-5 transition-hover"
                     style="transition: var(--transition); background: var(--white);">
-                    <div class="card-body d-flex flex-column align-items-center">
-                        {% if comunidad.logo_o_emblema %}
-                        <div class="mb-4">
-                            <div class="rounded-circle overflow-hidden shadow-sm"
-                                style="width: 140px; height: 140px; border: 4px solid var(--primary-soft);">
-                                {% get_srcset comunidad.logo_o_emblema.url as srcset %}
-                                <img src="{% version_url comunidad.logo_o_emblema.url 400 %}" srcset="{{ srcset }}"
-                                    sizes="140px" class="w-100 h-100" width="140" height="140"
-                                    style="object-fit: cover;" alt="{{ comunidad.nombre }}" loading="lazy">
-                            </div>
-                        </div>
+                    <div class="position-relative overflow-hidden" style="height: 300px;">
+                        {% get_srcset imagen.imagen.url as srcset %}
+                        <img src="{% version_url imagen.imagen.url 800 %}" srcset="{{ srcset }}"
+                            sizes="(max-width: 768px) 100vw, 50vw" class="w-100 h-100" width="600" height="400"
+                            style="object-fit: cover; transition: var(--transition);"
+                            alt="{{ imagen.titulo }}" loading="lazy">
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <h2 class="fw-bold mb-2 h5">{{ imagen.titulo }}</h2>
+                        {% if imagen.descripcion %}
+                        <p class="text-muted mb-0 flex-grow-1">{{ imagen.descripcion }}</p>
                         {% endif %}
-
-                        <h2 class="fw-bold mb-3 h4">{{ comunidad.nombre }}</h2>
-
-                        <div class="mb-4">
-                            <span class="badge bg-primary-soft text-primary px-3 py-2 rounded-pill fw-bold small">
-                                <i class="bi bi-tag-fill me-2"></i>{{ comunidad.get_tipo_display }}
-                            </span>
-                        </div>
-
-                        <p class="text-muted mb-5 px-3">
-                            {{ comunidad.resena_cultural|truncatewords:20 }}
-                        </p>
-
-                        <div class="mt-auto">
-                            <a href="{% url 'comunidades:detalle' comunidad.slug %}"
-                                class="btn-premium text-decoration-none d-inline-block px-5">Explorar <i
-                                    class="bi bi-chevron-right ms-2"></i></a>
-                        </div>
                     </div>
                 </div>
             </div>
             {% empty %}
             <div class="col-12 text-center py-5">
                 <div class="bg-white p-5 rounded-5 shadow-sm d-inline-block">
-                    <i class="bi bi-people display-1 text-muted opacity-25 mb-4 d-block"></i>
-                    <h2 class="text-muted h4">Próximamente estaremos publicando información sobre nuestras comunidades.
+                    <i class="bi bi-image display-1 text-muted opacity-25 mb-4 d-block"></i>
+                    <h2 class="text-muted h4">Próximamente estaremos publicando imágenes de nuestra galería.
                     </h2>
                 </div>
             </div>
@@ -88,12 +63,11 @@ el norte del Cauca, tradiciones ancestrales y patrimonio social.{% endblock %}
     </div>
     <section class="container mb-5">
         <div class="bg-white p-5 rounded-5 shadow-premium text-center animate-fade">
-            <h2 class="section-title mb-4">Diversidad que Construye Territorio</h2>
+            <h2 class="section-title mb-4">Explora Nuestro Territorio</h2>
             <p class="lead text-muted mx-auto col-md-10 fs-5">
-                La riqueza cultural de Suárez, Cauca, es el resultado del encuentro
-                entre pueblos indígenas, comunidades afrodescendientes y familias campesinas,
-                quienes desde sus saberes y tradiciones aportan al desarrollo social,
-                económico y cultural del municipio.
+                Cada imagen cuenta una historia de Suárez, Cauca: nuestros paisajes cafeteros,
+                nuestras comunidades, nuestra gente y la riqueza ambiental y cultural que nos define.
+                Eres invitado a conocer y disfrutar de la belleza de nuestro municipio.
             </p>
         </div>
     </section>

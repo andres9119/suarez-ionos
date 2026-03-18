@@ -107,9 +107,6 @@ diversidad cultural en el norte del Cauca.{% endblock %}
                     {% if banner %}
                     <a href="{{ banner.link_boton }}" class="btn-premium text-decoration-none">{{ banner.texto_boton }}
                         <i class="bi bi-chevron-right ms-2"></i></a>
-                    {% else %}
-                    <a href="{% url 'noticias:lista' %}" class="btn-premium text-decoration-none">Ver Actualidad <i
-                            class="bi bi-newspaper ms-2"></i></a>
                     {% endif %}
                     <a href="{% url 'contacto:index' %}" class="btn-premium text-decoration-none">Contactar <i
                             class="bi bi-envelope ms-2"></i></a>

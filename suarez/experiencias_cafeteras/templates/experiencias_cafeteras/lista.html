@@ -2,104 +2,86 @@
 {% load static %}
 {% load image_utils %}
 
-{% block title %}Experiencias Cafeteras en Suárez, Cauca - Tradición de Café Especial{% endblock %}
+{% block title %}Cultura Cafetera en Suárez, Cauca - Tradición de Café Especial{% endblock %}
 
-{% block meta_description %}Descubre la cultura del café especial en Suárez, Cauca. Fincas cafeteras, procesos de
-producción y experiencias de turismo rural en el norte del Cauca.{% endblock %}
+{% block meta_description %}Descubre la cultura del café especial en Suárez, Cauca. Experiencias cafeteras, procesos de producción y turismo rural en el norte del Cauca.{% endblock %}
 
 {% block content %}
-<!-- Cinematic Hero -->
-<section class="hero-coffee animate-fade-static bg-caficultores"
-    style="min-height: 400px; padding: 100px 0 120px; position: relative;">
-    <div class="container position-relative z-2" style="margin-top: 40px;">
-        <div class="row justify-content-center">
-            <div class="col-lg-8 mx-auto text-center">
-                <span
-                    class="badge bg-accent text-navy mb-3 px-3 py-2 rounded-pill fw-bold text-uppercase shadow-sm">Nuestro
-                    Orgullo</span>
-                <h1 class="fw-extrabold mb-3 text-white"
-                    style="font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1.1;">Cultura Cafetera en Suárez, Cauca
-                </h1>
+<div class="hero-institution animate-fade-static bg-caficultores"
+    style="min-height: 480px; padding: 100px 0 120px; position: relative; background-color: var(--navy);">
+    <div class="container text-center position-relative z-2">
+        <span class="badge bg-accent text-navy mb-3 px-3 py-2 rounded-pill fw-bold text-uppercase shadow-sm">Experiencias</span>
+        <h1 class="fw-extrabold mb-3 text-white" style="font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1.1;">
+            Cultura Cafetera en Suárez</h1>
 
-                <!-- Breadcrumbs -->
-                <nav aria-label="breadcrumb" class="d-flex justify-content-center mb-4">
-                    <ol class="breadcrumb mb-0">
-                        <li class="breadcrumb-item"><a href="{% url 'inicio:home' %}"
-                                class="text-white text-decoration-none opacity-75 hover-accent">Inicio</a></li>
-                        <li class="breadcrumb-item active text-white" aria-current="page">Cultura Cafetera</li>
-                    </ol>
-                </nav>
+        <!-- Breadcrumbs -->
+        <nav aria-label="breadcrumb" class="d-flex justify-content-center mb-4">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="{% url 'inicio:home' %}"
+                        class="text-white text-decoration-none opacity-75 hover-accent">Inicio</a></li>
+                <li class="breadcrumb-item active text-white" aria-current="page">Cultura Cafetera</li>
+            </ol>
+        </nav>
 
-                <p class="lead text-white fs-4 fw-medium opacity-90 col-md-9 mx-auto">Descubre la tradición cafetera de
-                    Suárez, Cauca, un territorio donde cada grano
-                    refleja historia, trabajo comunitario y compromiso con la calidad.
-                    Sumérgete en experiencias rurales que conectan el café con identidad y desarrollo local.</p>
-            </div>
-        </div>
+        <p class="lead text-white fs-4 fw-medium opacity-90 col-md-9 mx-auto">Suárez, Cauca, es territorio donde la tradición cafetera se vive en cada grano, en cada proceso y en la dedicación de nuestras familias cafeteras. Vive la experiencia de nuestro café especial.</p>
     </div>
+</div>
 
-
-</section>
-
-<!-- Coffee Experiences Grid -->
-<section class="section-padding bg-pattern-dots" style="background-color: var(--light);">
-    <div class="container">
-        <header class="mb-5 text-center">
-            <h2 class="section-title mx-auto text-uppercase">Historias que Nacen en la Montaña</h2>
-            <p class="text-muted fs-5 mt-4 col-md-8 mx-auto">En las montañas de Suárez, el café no es solo un cultivo:
-                es herencia, es sustento y es orgullo.
-                Cada familia cafetera construye territorio a través del trabajo
-                y la dedicación que se refleja en cada taza.</p>
-        </header>
-
-        <div class="row g-5">
-            {% for exp in experiencias %}
+<div class="py-5" {% static 'img/comunidadesfondo.jpg' as bg_img_uri %} {% webp_url bg_img_uri as bg_img %}
+    style="background: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url('{{ bg_img }}'); background-size: cover; background-position: center; background-attachment: fixed;">
+    <div class="container section-padding">
+        <div class="row g-4 justify-content-center">
+            {% for experiencia in experiencias %}
             <div class="col-lg-4 col-md-6">
-                <a href="{% url 'experiencias_cafeteras:detalle' exp.slug %}" class="card-experience-link">
-                    <div class="card-experience-item">
-                        <div class="card-experience-image" {% webp_url exp.imagen_principal.url as exp_webp %}
-                            style="background-image: url('{{ exp_webp }}');">
-                            <span class="card-experience-badge">{{ forloop.counter|stringformat:"02d" }}</span>
-                        </div>
-                        <div class="card-experience-content">
-                            <h3 class="card-experience-title">{{ exp.titulo }}</h3>
-                            <p class="card-experience-description">{{ exp.historia|truncatewords:20 }}</p>
-                            <div class="card-experience-footer">
-                                <span class="card-experience-button">
-                                    Descubrir historia <i class="bi bi-arrow-right ms-2"></i>
-                                </span>
+                <div class="card h-100 text-center border-0 shadow-premium rounded-5 p-4 p-xl-5 transition-hover"
+                    style="transition: var(--transition); background: var(--white);">
+                    <div class="card-body d-flex flex-column align-items-center">
+                        {% if experiencia.imagen_principal %}
+                        <div class="mb-4">
+                            <div class="rounded-5 overflow-hidden shadow-sm"
+                                style="width: 100%; height: 200px; border: 4px solid var(--primary-soft);">
+                                {% get_srcset experiencia.imagen_principal.url as srcset %}
+                                <img src="{% version_url experiencia.imagen_principal.url 400 %}" srcset="{{ srcset }}"
+                                    sizes="100%" class="w-100 h-100" width="300" height="200"
+                                    style="object-fit: cover;" alt="{{ experiencia.titulo }}" loading="lazy">
                             </div>
                         </div>
+                        {% endif %}
+
+                        <h2 class="fw-bold mb-3 h4">{{ experiencia.titulo }}</h2>
+
+                        <p class="text-muted mb-5 px-3">
+                            {{ experiencia.historia|truncatewords:20 }}
+                        </p>
+
+                        <div class="mt-auto">
+                            <a href="{% url 'experiencias_cafeteras:detalle' experiencia.slug %}"
+                                class="btn-premium text-decoration-none d-inline-block px-5">Explorar <i
+                                    class="bi bi-chevron-right ms-2"></i></a>
+                        </div>
                     </div>
-                </a>
+                </div>
             </div>
             {% empty %}
             <div class="col-12 text-center py-5">
                 <div class="bg-white p-5 rounded-5 shadow-sm d-inline-block">
                     <i class="bi bi-cup-hot display-1 text-muted opacity-25 mb-4 d-block"></i>
-                    <h3 class="text-muted">Próximamente compartiremos nuevas historias...</h3>
+                    <h2 class="text-muted h4">Próximamente estaremos publicando experiencias cafeteras.
+                    </h2>
                 </div>
             </div>
             {% endfor %}
         </div>
     </div>
-</section>
-
-<!-- CTA Info -->
-<section class="section-padding">
-    <div class="container text-center">
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <div class="p-5 bg-primary-soft rounded-5 shadow-sm border border-white">
-                    <h2 class="fw-bold mb-4">¿Eres productor o parte de una asociación?</h2>
-                    <p class="fs-5 text-muted mb-5">Queremos que tu historia sea parte de este portal institucional.
-                        Contáctanos para destacar tu marca y proceso productivo.</p>
-                    <a href="{% url 'contacto:index' %}" class="btn-premium text-decoration-none">
-                        Contactar con Desarrollo Rural <i class="bi bi-chat-heart ms-2"></i>
-                    </a>
-                </div>
-            </div>
+    <section class="container mb-5">
+        <div class="bg-white p-5 rounded-5 shadow-premium text-center animate-fade">
+            <h2 class="section-title mb-4">La Pasión del Café en Cada Experiencia</h2>
+            <p class="lead text-muted mx-auto col-md-10 fs-5">
+                Conoce las historias, procesos y dedicación de quienes cultivan el café especial
+                en Suárez, Cauca. Desde la semilla hasta la taza, cada experiencia refleja
+                nuestra tradición cafetera y nuestro compromiso con la calidad.
+            </p>
         </div>
-    </div>
-</section>
+    </section>
+</div>
 {% endblock %}

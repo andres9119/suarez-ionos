@@ -32,3 +32,24 @@ class ImagenComunidad(models.Model):
 
     def __str__(self):
         return f"Imagen de {self.comunidad.nombre}"
+
+
+class GaleriaMunicipio(models.Model):
+    titulo = models.CharField(max_length=200)
+    slug = models.SlugField(max_length=200, unique=False, blank=True, null=True)
+    imagen = OptimizedImageField(upload_to='galeria/municipio/', max_width=1200, max_height=800, quality=85, create_thumbnail=True)
+    imagen_thumbnail = models.ImageField(upload_to='galeria/municipio/thumbnails/', blank=True, null=True)
+    descripcion = models.TextField(blank=True, null=True, help_text="Texto descriptivo de la imagen (opcional)")
+    orden = models.IntegerField(default=0, help_text="Orden de presentación en la galería")
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['orden', '-fecha_creacion']
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.titulo)
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.titulo
