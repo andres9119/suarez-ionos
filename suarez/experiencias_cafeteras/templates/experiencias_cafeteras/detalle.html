@@ -52,64 +52,69 @@
 
         <!-- Dynamic Content Blocks -->
         {% if contenido %}
-        <div class="row g-5">
             {% for bloque in contenido %}
                 {% if bloque.tipo == 'texto' %}
                 <!-- Text Block -->
-                <div class="col-lg-8">
-                    <div class="pe-lg-5">
-                        {% if bloque.titulo_texto %}
-                        <h2 class="section-title mb-4">{{ bloque.titulo_texto }}</h2>
-                        {% endif %}
-                        <div class="content-text fs-5" style="color: #4e342e; line-height: 1.8;">
-                            {{ bloque.contenido_texto|linebreaks }}
+                <div class="row mb-5 pb-5 border-bottom">
+                    <div class="col-lg-8">
+                        <div class="pe-lg-5">
+                            {% if bloque.titulo_texto %}
+                            <h2 class="section-title mb-4">{{ bloque.titulo_texto }}</h2>
+                            {% endif %}
+                            <div class="content-text fs-5" style="color: #4e342e; line-height: 1.8;">
+                                {{ bloque.contenido_texto|linebreaks }}
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 {% elif bloque.tipo == 'video' %}
                 <!-- Video Block -->
-                <div class="col-lg-8 mx-auto">
-                    {% if bloque.titulo_texto %}
-                    <h2 class="section-title mb-4">{{ bloque.titulo_texto }}</h2>
-                    {% endif %}
-                    <div class="rounded-4 overflow-hidden shadow-lg">
-                        {% with vid_id=bloque.url_video|youtube_id %}
-                        <div class="lite-youtube" data-video-id="{{ vid_id }}"
-                            style="background-image: url('https://i.ytimg.com/vi/{{ vid_id }}/hqdefault.jpg');"
-                            aria-label="Reproducir {{ bloque.titulo_texto|default:'Video' }}">
-                            <button type="button" class="lty-playbtn" aria-label="Reproducir Video"></button>
+                <div class="row mb-5 pb-5 justify-content-center">
+                    <div class="col-lg-8">
+                        {% if bloque.titulo_texto %}
+                        <h2 class="section-title mb-4">{{ bloque.titulo_texto }}</h2>
+                        {% endif %}
+                        <div class="rounded-4 overflow-hidden shadow-lg" style="aspect-ratio: 16/9;">
+                            {% with vid_id=bloque.url_video|youtube_id %}
+                            <div class="lite-youtube w-100 h-100" data-video-id="{{ vid_id }}"
+                                style="background-image: url('https://i.ytimg.com/vi/{{ vid_id }}/hqdefault.jpg');"
+                                aria-label="Reproducir {{ bloque.titulo_texto|default:'Video' }}">
+                                <button type="button" class="lty-playbtn" aria-label="Reproducir Video"></button>
+                            </div>
+                            {% endwith %}
                         </div>
-                        {% endwith %}
                     </div>
                 </div>
 
                 {% elif bloque.tipo == 'imagen' %}
                 <!-- Image Block -->
-                <div class="col-lg-10 mx-auto">
-                    <div class="rounded-5 overflow-hidden shadow-lg">
-                        {% webp_url bloque.imagen.url as img_url %}
-                        {% version_url bloque.imagen.url as versioned_url %}
-                        {% get_srcset bloque.imagen.url as srcset_data %}
-                        <figure class="mb-0">
-                            <img 
-                                src="{{ img_url }}"
-                                srcset="{{ srcset_data }}"
-                                alt="{{ bloque.descripcion_imagen|default:experiencia.titulo }}"
-                                class="img-fluid w-100"
-                                loading="lazy"
-                            />
-                            {% if bloque.descripcion_imagen %}
-                            <figcaption class="p-4 bg-white border-top">
-                                <p class="mb-0 text-muted">{{ bloque.descripcion_imagen }}</p>
-                            </figcaption>
-                            {% endif %}
-                        </figure>
+                <div class="row mb-5 pb-5 justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="rounded-5 overflow-hidden shadow-lg">
+                            {% webp_url bloque.imagen.url as img_url %}
+                            {% version_url bloque.imagen.url as versioned_url %}
+                            {% get_srcset bloque.imagen.url as srcset_data %}
+                            <figure class="mb-0">
+                                <img 
+                                    src="{{ img_url }}"
+                                    srcset="{{ srcset_data }}"
+                                    alt="{{ bloque.descripcion_imagen|default:experiencia.titulo }}"
+                                    class="img-fluid w-100"
+                                    style="height: auto; max-height: 600px; object-fit: cover;"
+                                    loading="lazy"
+                                />
+                                {% if bloque.descripcion_imagen %}
+                                <figcaption class="p-4 bg-white border-top">
+                                    <p class="mb-0 text-muted small">{{ bloque.descripcion_imagen }}</p>
+                                </figcaption>
+                                {% endif %}
+                            </figure>
+                        </div>
                     </div>
                 </div>
                 {% endif %}
             {% endfor %}
-        </div>
         {% endif %}
 
         <!-- Social Proof/Legacy -->
