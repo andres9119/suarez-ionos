@@ -18,6 +18,14 @@ class ExperienciaCafetera(models.Model):
             self.slug = slugify(self.titulo)
         super().save(*args, **kwargs)
 
+    @property
+    def primera_imagen(self):
+        """Retorna la primera imagen del contenido, o la imagen_principal si no hay contenido"""
+        imagen_bloque = self.contenido.filter(tipo='imagen').first()
+        if imagen_bloque and imagen_bloque.imagen:
+            return imagen_bloque.imagen
+        return self.imagen_principal if self.imagen_principal else None
+
     def __str__(self):
         return self.titulo
 

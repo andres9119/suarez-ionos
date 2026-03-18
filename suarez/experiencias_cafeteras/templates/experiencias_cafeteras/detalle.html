@@ -7,8 +7,8 @@
 
 {% block content %}
 <!-- Immersive Story Header -->
-<section class="hero-coffee animate-fade" {% if experiencia.imagen_principal %} {% webp_url
-    experiencia.imagen_principal.url as banner_url %}
+<section class="hero-coffee animate-fade" {% if experiencia.primera_imagen %} {% webp_url
+    experiencia.primera_imagen.url as banner_url %}
     style="background-image:linear-gradient(rgba(0,37,26,0.5),rgba(0,37,26,0.3)),url('{{ banner_url }}'); height:50vh; min-height:400px; padding:100px 0 120px; position:relative;"
     {% else %} style="height:50vh; min-height:400px; padding:100px 0 120px; position:relative;" {% endif %}>
     <div class="container position-relative z-2" style="margin-top: 40px;">
