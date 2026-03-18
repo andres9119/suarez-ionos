@@ -10,6 +10,9 @@
 <!-- Hero Section -->
 <div class="hero-institution animate-fade-static bg-caficultores"
     style="min-height: 480px; padding: 100px 0 120px; position: relative; background-color: var(--navy);">
+    {% static 'img/banner-productos.webp' as banner_static %}
+    {% webp_url banner_static as banner_url %}
+    <div class="position-absolute top-0 start-0 w-100 h-100" style="background-image: linear-gradient(rgba(0,37,26,0.6),rgba(0,37,26,0.6)), url('{{ banner_url }}'); background-size: cover; background-position: center; z-index: 1;"></div>
     <div class="container text-center position-relative z-2">
         <span class="badge bg-accent text-navy mb-3 px-3 py-2 rounded-pill fw-bold text-uppercase shadow-sm">Catálogo</span>
         <h1 class="fw-extrabold mb-3 text-white" style="font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1.1;">
@@ -31,8 +34,8 @@
 </div>
 
 <!-- Products Grid -->
-<div class="py-5" {% static 'img/comunidadesfondo.jpg' as bg_img_uri %} {% webp_url bg_img_uri as bg_img %}
-    style="background: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url('{{ bg_img }}'); background-size: cover; background-position: center; background-attachment: fixed;">
+<div class="py-5" {% static 'img/fondo-productos.webp' as bg_img_uri %} {% webp_url bg_img_uri as bg_img %}
+    style="background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('{{ bg_img }}'); background-size: cover; background-position: center; background-attachment: fixed;">
     <div class="container section-padding">
         <!-- Products -->
         <div class="row g-4 justify-content-center">
