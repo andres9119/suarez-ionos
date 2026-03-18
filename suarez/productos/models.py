@@ -7,11 +7,10 @@ class Producto(models.Model):
     titulo = models.CharField(max_length=200, help_text="Nombre del producto o servicio")
     slug = models.SlugField(max_length=200, unique=True, blank=True, null=True)
     descripcion = models.TextField(help_text="Descripción detallada del producto/servicio")
-    orden = models.IntegerField(default=0, help_text="Orden de presentación")
     fecha_creacion = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = ['orden', '-fecha_creacion']
+        ordering = ['-fecha_creacion']
         verbose_name = "Producto"
         verbose_name_plural = "Productos"
 
@@ -36,15 +35,15 @@ class ImagenProducto(models.Model):
         max_width=1200,
         max_height=800,
         quality=85,
-        create_thumbnail=True
+        create_thumbnail=True,
+        help_text="La imagen se optimizará automáticamente a WebP (se comprimirá significativamente)"
     )
-    orden = models.IntegerField(default=0)
     fecha_creacion = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = ['producto', 'orden', '-fecha_creacion']
+        ordering = ['-fecha_creacion']
         verbose_name = "Imagen de Producto"
         verbose_name_plural = "Imágenes de Productos"
 
     def __str__(self):
-        return f"{self.producto.titulo} - Imagen {self.orden}"
+        return f"{self.producto.titulo} - Imagen"
