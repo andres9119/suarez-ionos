@@ -8,7 +8,7 @@
 
 {% block content %}
 <div class="hero-institution animate-fade-static bg-comunidades-hero"
-    style="min-height: 480px; padding: 100px 0 120px; position: relative; background-color: var(--navy);">
+    style="min-height: 480px; padding: 100px 0 120px; position: relative; background-color: var(--navy); {% static 'img/banner-comunidades.webp' as banner_bg %}background-image: linear-gradient(rgba(0, 37, 26, 0.6), rgba(0, 37, 26, 0.6)), url('{{ banner_bg }}'); background-size: cover; background-position: center;">
     <div class="container text-center position-relative z-2">
         <span class="badge bg-accent text-navy mb-3 px-3 py-2 rounded-pill fw-bold text-uppercase shadow-sm">Galería</span>
         <h1 class="fw-extrabold mb-3 text-white" style="font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1.1;">
