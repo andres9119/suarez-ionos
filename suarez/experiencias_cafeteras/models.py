@@ -6,7 +6,7 @@ class ExperienciaCafetera(models.Model):
     titulo = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=False, blank=True, null=True)
     descripcion_breve = models.TextField(blank=True, null=True, help_text="Descripción breve para la lista")
-    imagen_principal = OptimizedImageField(upload_to='cafe/imagenes/', max_width=1200, max_height=800, quality=85, create_thumbnail=True)
+    imagen_principal = OptimizedImageField(upload_to='cafe/imagenes/', max_width=1200, max_height=800, quality=85, create_thumbnail=True, blank=True, null=True)
     imagen_thumbnail = models.ImageField(upload_to='cafe/imagenes/thumbnails/', blank=True, null=True)
     fecha_publicacion = models.DateTimeField(auto_now_add=True)
 
