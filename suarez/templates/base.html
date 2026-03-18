@@ -102,6 +102,10 @@
                             href="{% url 'experiencias_cafeteras:lista' %}">Cultura Cafetera</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.app_name == 'productos' %}active{% endif %}"
+                            href="{% url 'productos:lista' %}">Nuestros Productos</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link {% if request.resolver_match.app_name == 'contacto' %}active{% endif %}"
                             href="{% url 'contacto:index' %}">Contacto</a>
                     </li>

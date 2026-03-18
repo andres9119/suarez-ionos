@@ -1,0 +1,171 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load image_utils %}
+
+{% block title %}Nuestros Productos y Servicios - Suárez, Cauca{% endblock %}
+
+{% block meta_description %}Descubre nuestros productos y servicios de café, artesanías y más. Puros de Suárez, Cauca. Contáctanos por WhatsApp.{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="hero-institution animate-fade-static bg-caficultores"
+    style="min-height: 480px; padding: 100px 0 120px; position: relative; background-color: var(--navy);">
+    <div class="container text-center position-relative z-2">
+        <span class="badge bg-accent text-navy mb-3 px-3 py-2 rounded-pill fw-bold text-uppercase shadow-sm">Catálogo</span>
+        <h1 class="fw-extrabold mb-3 text-white" style="font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1.1;">
+            Nuestros Productos y Servicios</h1>
+
+        <!-- Breadcrumbs -->
+        <nav aria-label="breadcrumb" class="d-flex justify-content-center mb-4">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="{% url 'inicio:home' %}"
+                        class="text-white text-decoration-none opacity-75 hover-accent">Inicio</a></li>
+                <li class="breadcrumb-item active text-white" aria-current="page">Productos</li>
+            </ol>
+        </nav>
+
+        <p class="lead text-white fs-4 fw-medium opacity-90 col-md-9 mx-auto">
+            Conoce nuestra selección exclusiva de productos y servicios de Suárez, Cauca. Productos de calidad, elaborados con tradición y dedicación.
+        </p>
+    </div>
+</div>
+
+<!-- Products Grid -->
+<div class="py-5" {% static 'img/comunidadesfondo.jpg' as bg_img_uri %} {% webp_url bg_img_uri as bg_img %}
+    style="background: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url('{{ bg_img }}'); background-size: cover; background-position: center; background-attachment: fixed;">
+    <div class="container section-padding">
+        <!-- Products -->
+        <div class="row g-4 justify-content-center">
+            {% for producto in productos %}
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 border-0 shadow-premium rounded-5 overflow-hidden transition-hover"
+                    style="transition: var(--transition); background: var(--white);">
+                    
+                    <!-- Product Image -->
+                    {% if producto.primera_imagen %}
+                    <div class="position-relative" style="height: 250px; overflow: hidden;">
+                        {% get_srcset producto.primera_imagen.imagen.url as srcset %}
+                        <img src="{% version_url producto.primera_imagen.imagen.url 400 %}" 
+                            srcset="{{ srcset }}"
+                            sizes="100%" 
+                            class="w-100 h-100" 
+                            width="300" 
+                            height="250"
+                            style="object-fit: cover;" 
+                            alt="{{ producto.titulo }}" 
+                            loading="lazy">
+                        <!-- Gallery indicator if multiple images -->
+                        {% if producto.imagenes.count > 1 %}
+                        <div class="position-absolute bottom-0 end-0 bg-dark bg-opacity-75 text-white px-3 py-2 rounded-4 m-3 small fw-bold">
+                            <i class="bi bi-images"></i> {{ producto.imagenes.count }} imágenes
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+
+                    <!-- Product Info -->
+                    <div class="card-body d-flex flex-column">
+                        <h2 class="fw-bold h5 mb-3">{{ producto.titulo }}</h2>
+                        
+                        <p class="text-muted small flex-grow-1">
+                            {{ producto.descripcion|truncatewords:30 }}
+                        </p>
+
+                        <!-- Gallery Modal Button (if multiple images) -->
+                        {% if producto.imagenes.count > 1 %}
+                        <div class="d-flex gap-2 mt-3">
+                            <button type="button" class="btn btn-outline-secondary flex-grow-1 rounded-pill btn-sm"
+                                data-bs-toggle="modal" data-bs-target="#modal-{{ producto.slug }}">
+                                <i class="bi bi-images me-2"></i> Ver galería
+                            </button>
+                            <a href="{{ whatsapp_url }}" target="_blank" rel="noopener noreferrer"
+                                class="btn-premium text-decoration-none d-inline-flex align-items-center justify-content-center rounded-pill"
+                                style="min-width: 45px; padding: 10px;">
+                                <i class="bi bi-whatsapp"></i>
+                            </a>
+                        </div>
+                        {% else %}
+                        <!-- Single button if only one image -->
+                        <div class="mt-3">
+                            <a href="{{ whatsapp_url }}" target="_blank" rel="noopener noreferrer"
+                                class="btn-premium text-decoration-none d-inline-block w-100 text-center px-4 py-2 rounded-pill">
+                                Consultar por WhatsApp <i class="bi bi-whatsapp ms-2"></i>
+                            </a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Image Gallery Modal -->
+                {% if producto.imagenes.count > 1 %}
+                <div class="modal fade" id="modal-{{ producto.slug }}" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                        <div class="modal-content border-0 rounded-5">
+                            <div class="modal-header border-0 bg-light">
+                                <h5 class="modal-title">{{ producto.titulo }}</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                            </div>
+                            <div class="modal-body p-0">
+                                <!-- Carousel -->
+                                <div id="carousel-{{ producto.slug }}" class="carousel slide rounded-bottom" data-bs-ride="carousel">
+                                    <div class="carousel-inner">
+                                        {% for imagen in producto.imagenes.all %}
+                                        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                            {% get_srcset imagen.imagen.url as srcset %}
+                                            <img src="{% version_url imagen.imagen.url 800 %}" 
+                                                srcset="{{ srcset }}"
+                                                sizes="100%"
+                                                class="d-block w-100" 
+                                                style="max-height: 600px; object-fit: cover;"
+                                                alt="{{ producto.titulo }}" 
+                                                loading="lazy">
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                    {% if producto.imagenes.count > 1 %}
+                                    <button class="carousel-control-prev" type="button" data-bs-target="#carousel-{{ producto.slug }}" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button" data-bs-target="#carousel-{{ producto.slug }}" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    </button>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="modal-footer border-0 bg-light d-flex justify-content-center">
+                                <a href="{{ whatsapp_url }}" target="_blank" rel="noopener noreferrer"
+                                    class="btn-premium text-decoration-none px-5 py-2 rounded-pill">
+                                    Consultar por WhatsApp <i class="bi bi-whatsapp ms-2"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+            {% empty %}
+            <div class="col-12 text-center py-5">
+                <div class="bg-white p-5 rounded-5 shadow-sm d-inline-block">
+                    <i class="bi bi-box2-open display-1 text-muted opacity-25 mb-4 d-block"></i>
+                    <h2 class="text-muted h4">Próximamente estaremos publicando nuestros productos y servicios.</h2>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- CTA Section -->
+        <section class="container mt-5 pt-5">
+            <div class="bg-white p-5 rounded-5 shadow-premium text-center animate-fade">
+                <h2 class="section-title mb-4">¿Interesado en nuestros productos?</h2>
+                <p class="lead text-muted mx-auto col-md-10 fs-5 mb-4">
+                    Contáctanos por WhatsApp para consultar disponibilidad, cantidades y más detalles sobre cada producto.
+                </p>
+                <a href="{{ whatsapp_url }}" target="_blank" rel="noopener noreferrer"
+                    class="btn-premium text-decoration-none d-inline-block px-5 py-3 rounded-pill fs-5">
+                    <i class="bi bi-whatsapp me-2"></i> Contáctanos por WhatsApp
+                </a>
+            </div>
+        </section>
+    </div>
+</div>
+{% endblock %}

@@ -42,6 +42,7 @@ urlpatterns = [
     path('experiencias-cafeteras/', include('experiencias_cafeteras.urls')),
     path('documentos/', include('documentos.urls')),
     path('contacto/', include('contacto.urls')),
+    path('productos/', include('productos.urls')),
 ]
 
 # Servir Media SIEMPRE (incluso en producción con DEBUG=False)

@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'noticias',
     'documentos',
     'contacto',
+    'productos',
     'django.contrib.sitemaps',
     'csp',
 ]
