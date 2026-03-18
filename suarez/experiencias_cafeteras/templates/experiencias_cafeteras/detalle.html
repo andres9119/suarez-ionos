@@ -39,50 +39,78 @@
 <!-- Storytelling Content -->
 <section class="section-padding bg-parchment">
     <div class="container">
-        <div class="row g-5">
-            <!-- Left Column: The Human Story -->
-            <div class="col-lg-7">
-                <div class="pe-lg-5">
-                    <h2 class="section-title mb-4">La Historia del Grano</h2>
-                    <div class="content-text fs-5" style="color: #4e342e; line-height: 1.8;">
-                        <p>{{ experiencia.historia }}</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Right Column: The Sensory Process -->
-            <div class="col-lg-5">
-                <div class="sensory-process-box sticky-top" style="top: 120px;">
-                    <div class="d-flex align-items-center mb-4 text-coffee-palette-primary">
-                        <div class="bg-accent p-3 rounded-circle me-3">
-                            <i class="bi bi-gear-fill fs-3 text-navy"></i>
-                        </div>
-                        <h2 class="mb-0 fw-bold text-uppercase h3">Proceso y Calidad</h2>
-                    </div>
-                    <hr class="mb-4 opacity-10">
-                    <div class="process-steps">
-                        <div class="content-text" style="color: #3e2723;">
-                            {{ experiencia.proceso|linebreaks }}
-                        </div>
-                    </div>
-
-                    {% if experiencia.video_url %}
-                    <div class="mt-5">
-                        <h4 class="fw-bold mb-3 small text-uppercase text-muted">Acompaña el recorrido:</h4>
-                        <div class="rounded-4 overflow-hidden shadow">
-                            {% with vid_id=experiencia.video_url|youtube_id %}
-                            <div class="lite-youtube" data-video-id="{{ vid_id }}"
-                                style="background-image: url('https://i.ytimg.com/vi/{{ vid_id }}/hqdefault.jpg');"
-                                aria-label="Reproducir Recorrido Visual de {{ experiencia.titulo }}">
-                                <button type="button" class="lty-playbtn" aria-label="Reproducir Video"></button>
-                            </div>
-                            {% endwith %}
-                        </div>
-                    </div>
-                    {% endif %}
+        <!-- Description Introduction -->
+        {% if experiencia.descripcion_breve %}
+        <div class="row mb-5 pb-5 border-bottom">
+            <div class="col-lg-8">
+                <div class="content-text fs-5" style="color: #4e342e; line-height: 1.8;">
+                    <p class="lead">{{ experiencia.descripcion_breve }}</p>
                 </div>
             </div>
         </div>
+        {% endif %}
+
+        <!-- Dynamic Content Blocks -->
+        {% if contenido %}
+        <div class="row g-5">
+            {% for bloque in contenido %}
+                {% if bloque.tipo == 'texto' %}
+                <!-- Text Block -->
+                <div class="col-lg-8">
+                    <div class="pe-lg-5">
+                        {% if bloque.titulo_texto %}
+                        <h2 class="section-title mb-4">{{ bloque.titulo_texto }}</h2>
+                        {% endif %}
+                        <div class="content-text fs-5" style="color: #4e342e; line-height: 1.8;">
+                            {{ bloque.contenido_texto|linebreaks }}
+                        </div>
+                    </div>
+                </div>
+
+                {% elif bloque.tipo == 'video' %}
+                <!-- Video Block -->
+                <div class="col-lg-8 mx-auto">
+                    {% if bloque.titulo_texto %}
+                    <h2 class="section-title mb-4">{{ bloque.titulo_texto }}</h2>
+                    {% endif %}
+                    <div class="rounded-4 overflow-hidden shadow-lg">
+                        {% with vid_id=bloque.url_video|youtube_id %}
+                        <div class="lite-youtube" data-video-id="{{ vid_id }}"
+                            style="background-image: url('https://i.ytimg.com/vi/{{ vid_id }}/hqdefault.jpg');"
+                            aria-label="Reproducir {{ bloque.titulo_texto|default:'Video' }}">
+                            <button type="button" class="lty-playbtn" aria-label="Reproducir Video"></button>
+                        </div>
+                        {% endwith %}
+                    </div>
+                </div>
+
+                {% elif bloque.tipo == 'imagen' %}
+                <!-- Image Block -->
+                <div class="col-lg-10 mx-auto">
+                    <div class="rounded-5 overflow-hidden shadow-lg">
+                        {% webp_url bloque.imagen.url as img_url %}
+                        {% version_url bloque.imagen.url as versioned_url %}
+                        {% get_srcset bloque.imagen.url as srcset_data %}
+                        <figure class="mb-0">
+                            <img 
+                                src="{{ img_url }}"
+                                srcset="{{ srcset_data }}"
+                                alt="{{ bloque.descripcion_imagen|default:experiencia.titulo }}"
+                                class="img-fluid w-100"
+                                loading="lazy"
+                            />
+                            {% if bloque.descripcion_imagen %}
+                            <figcaption class="p-4 bg-white border-top">
+                                <p class="mb-0 text-muted">{{ bloque.descripcion_imagen }}</p>
+                            </figcaption>
+                            {% endif %}
+                        </figure>
+                    </div>
+                </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        {% endif %}
 
         <!-- Social Proof/Legacy -->
         <div class="row mt-5 pt-5 text-center justify-content-center">

@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import ExperienciaCafetera
+from .models import ExperienciaCafetera, ContenidoExperiencia
 
 def lista_experiencias(request):
     experiencias = ExperienciaCafetera.objects.all()
@@ -7,4 +7,8 @@ def lista_experiencias(request):
 
 def detalle_experiencia(request, slug):
     experiencia = get_object_or_404(ExperienciaCafetera, slug=slug)
-    return render(request, 'experiencias_cafeteras/detalle.html', {'experiencia': experiencia})
+    contenido = ContenidoExperiencia.objects.filter(experiencia=experiencia).order_by('orden', 'fecha_creacion')
+    return render(request, 'experiencias_cafeteras/detalle.html', {
+        'experiencia': experiencia,
+        'contenido': contenido
+    })
