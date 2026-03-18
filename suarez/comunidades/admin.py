@@ -1,5 +1,7 @@
 from django.contrib import admin
+from django.utils.html import format_html
 from .models import Comunidad, ImagenComunidad, GaleriaMunicipio, SeccionTexto
+import os
 
 class ImagenComunidadInline(admin.TabularInline):
     model = ImagenComunidad
@@ -37,30 +39,42 @@ class GaleriaMunicipioAdmin(admin.ModelAdmin):
     list_filter = ('fecha_creacion',)
     list_editable = ('titulo',)
     search_fields = ('titulo', 'descripcion', 'slug')
-    prepopulated_fields = {'slug': ('titulo',)}
     ordering = ('orden', '-fecha_creacion')
     
     fieldsets = (
-        ('Información', {
-            'fields': ('titulo', 'slug', 'orden')
-        }),
         ('Imagen', {
-            'fields': ('imagen', 'imagen_thumbnail')
+            'fields': ('imagen',),
+            'description': 'Carga tu imagen. El título y slug se generarán automáticamente del nombre del archivo.'
+        }),
+        ('Información (Auto-Generada)', {
+            'fields': ('titulo', 'slug'),
+            'classes': ('collapse',),
+            'description': 'Se generan automáticamente. Puedes editar el título si lo deseas.'
+        }),
+        ('Orden', {
+            'fields': ('orden',),
+            'description': 'Número menor = primero en la galería'
         }),
         ('Descripción (Opcional)', {
             'fields': ('descripcion',),
+            'classes': ('collapse',),
+            'description': 'Añade una descripción si deseas (no será visible en la galería pública)'
+        }),
+        ('Thumbnail (Auto-Generado)', {
+            'fields': ('imagen_thumbnail',),
             'classes': ('collapse',)
         }),
     )
     
-    readonly_fields = ('imagen_thumbnail',)
+    readonly_fields = ('imagen_thumbnail', 'slug')
     
     def get_orden(self, obj):
         return f"#{obj.orden}"
-    get_orden.short_description = "Posición"
+    get_orden.short_description = "Pos"
     
     def get_imagen_preview(self, obj):
         if obj.imagen:
-            return f"✓ Imagen"
+            return format_html('✓ Imagen <br><small>{}</small>', 
+                             os.path.basename(obj.imagen.name)[:30])
         return "Sin imagen"
-    get_imagen_preview.short_description = "Estado"
+    get_imagen_preview.short_description = "Preview"

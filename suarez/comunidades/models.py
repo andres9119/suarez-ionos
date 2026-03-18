@@ -50,7 +50,7 @@ class SeccionTexto(models.Model):
 
 
 class GaleriaMunicipio(models.Model):
-    titulo = models.CharField(max_length=200)
+    titulo = models.CharField(max_length=200, blank=True, null=True, help_text="Se genera automáticamente del nombre de la imagen")
     slug = models.SlugField(max_length=200, unique=False, blank=True, null=True)
     imagen = OptimizedImageField(upload_to='galeria/municipio/', max_width=1200, max_height=800, quality=85, create_thumbnail=True)
     imagen_thumbnail = models.ImageField(upload_to='galeria/municipio/thumbnails/', blank=True, null=True)
@@ -64,9 +64,17 @@ class GaleriaMunicipio(models.Model):
         verbose_name_plural = "Galería de Imágenes"
 
     def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.titulo)
+        # Generar título y slug del nombre del archivo si no existen
+        if self.imagen and (not self.titulo or not self.slug):
+            nombre_archivo = self.imagen.name.split('/')[-1]
+            nombre_limpio = nombre_archivo.rsplit('.', 1)[0].replace('_', ' ').replace('-', ' ').title()
+            
+            if not self.titulo:
+                self.titulo = nombre_limpio
+            if not self.slug:
+                self.slug = slugify(nombre_limpio)
+        
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.titulo
+        return self.titulo or self.imagen.name
