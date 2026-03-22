@@ -50,8 +50,11 @@ def buscar(request):
             
         if filter_type in ['all', 'experiencias']:
             resultados_cafe = ExperienciaCafetera.objects.filter(
-                Q(titulo__icontains=query) | Q(historia__icontains=query)
-            )
+                Q(titulo__icontains=query) | 
+                Q(descripcion_breve__icontains=query) |
+                Q(contenido__contenido_texto__icontains=query) |
+                Q(contenido__titulo_bloque__icontains=query)
+            ).distinct()
             
         if filter_type in ['all', 'comunidades']:
             resultados_comul = Comunidad.objects.filter(

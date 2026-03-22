@@ -52,67 +52,67 @@
         <!-- Dynamic Content Blocks -->
         {% if contenido %}
             {% for bloque in contenido %}
-                {% if bloque.tipo == 'texto' %}
-                <!-- Text Block -->
                 <div class="row mb-5 pb-5 border-bottom">
                     <div class="col-lg-9">
-                        <div class="pe-lg-5">
-                            {% if bloque.titulo_texto %}
-                            <h2 class="section-title mb-4">{{ bloque.titulo_texto }}</h2>
-                            {% endif %}
-                            <div class="content-text fs-5" style="color: #4e342e; line-height: 1.8;">
-                                {{ bloque.contenido_texto|linebreaks }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {% elif bloque.tipo == 'video' %}
-                <!-- Video Block -->
-                <div class="row mb-5 pb-5 justify-content-center">
-                    <div class="col-lg-9">
-                        {% if bloque.titulo_texto %}
-                        <h2 class="section-title mb-4">{{ bloque.titulo_texto }}</h2>
+                        {% if bloque.titulo_bloque %}
+                        <h2 class="section-title mb-4">{{ bloque.titulo_bloque }}</h2>
                         {% endif %}
+
+                        {% if bloque.tipo == 'texto' %}
+                        <!-- Text Block -->
+                        <div class="content-text fs-5" style="color: #4e342e; line-height: 1.8;">
+                            {{ bloque.contenido_texto|linebreaks }}
+                        </div>
+
+                        {% elif bloque.tipo == 'video' %}
+                        <!-- Video Block -->
                         <div class="rounded-4 overflow-hidden shadow-lg" style="aspect-ratio: 16/9;">
-                            {% with vid_id=bloque.url_video|youtube_id %}
-                            <div class="lite-youtube w-100 h-100" data-video-id="{{ vid_id }}"
-                                style="background-image: url('https://i.ytimg.com/vi/{{ vid_id }}/hqdefault.jpg');"
-                                aria-label="Reproducir {{ bloque.titulo_texto|default:'Video' }}">
-                                <button type="button" class="lty-playbtn" aria-label="Reproducir Video"></button>
-                            </div>
+                            {% with platform=bloque.url_video|video_platform %}
+                                {% if platform == 'vimeo' %}
+                                    {% with embed_url=bloque.url_video|vimeo_embed_url %}
+                                    <div style="padding:56.25% 0 0 0;position:relative; width: 100%; height: 100%;">
+                                        <iframe src="{{ embed_url }}&title=0&byline=0&portrait=0"
+                                            style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0"
+                                            allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
+                                        </iframe>
+                                    </div>
+                                    {% endwith %}
+                                {% else %}
+                                    {% with vid_id=bloque.url_video|youtube_id %}
+                                    <div class="lite-youtube w-100 h-100" data-video-id="{{ vid_id }}"
+                                        style="background-image: url('https://i.ytimg.com/vi/{{ vid_id }}/hqdefault.jpg');"
+                                        aria-label="Reproducir {{ bloque.titulo_bloque|default:'Video' }}">
+                                        <button type="button" class="lty-playbtn" aria-label="Reproducir Video"></button>
+                                    </div>
+                                    {% endwith %}
+                                {% endif %}
                             {% endwith %}
                         </div>
-                    </div>
-                </div>
 
-                {% elif bloque.tipo == 'imagen' %}
-                <!-- Image Block -->
-                <div class="row mb-5 pb-5 justify-content-center">
-                    <div class="col-lg-9">
+                        {% elif bloque.tipo == 'imagen' %}
+                        <!-- Image Block -->
                         <div class="rounded-5 overflow-hidden shadow-lg">
                             {% webp_url bloque.imagen.url as img_url %}
-                            {% version_url bloque.imagen.url as versioned_url %}
                             {% get_srcset bloque.imagen.url as srcset_data %}
                             <figure class="mb-0">
                                 <img 
                                     src="{{ img_url }}"
                                     srcset="{{ srcset_data }}"
-                                    alt="{{ bloque.descripcion_imagen|default:experiencia.titulo }}"
+                                    alt="{{ bloque.descripcion_imagen|default:bloque.titulo_bloque|default:experiencia.titulo }}"
                                     class="img-fluid w-100"
-                                    style="height: auto; max-height: 600px; object-fit: cover;"
+                                    style="height: auto; max-height: 700px; object-fit: cover;"
                                     loading="lazy"
                                 />
                                 {% if bloque.descripcion_imagen %}
                                 <figcaption class="p-4 bg-white border-top">
-                                    <p class="mb-0 text-muted small">{{ bloque.descripcion_imagen }}</p>
+                                    <p class="mb-0 text-muted small text-center">{{ bloque.descripcion_imagen }}</p>
                                 </figcaption>
                                 {% endif %}
                             </figure>
                         </div>
+                        {% endif %}
                     </div>
                 </div>
-                {% endif %}
             {% endfor %}
         {% endif %}
 

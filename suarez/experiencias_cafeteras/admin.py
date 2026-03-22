@@ -3,27 +3,24 @@ from .models import ExperienciaCafetera, ContenidoExperiencia
 
 class ContenidoExperienciaInline(admin.StackedInline):
     model = ContenidoExperiencia
-    extra = 1
-    fields = ('tipo', 'orden', 'titulo_texto', 'contenido_texto', 'url_video', 'imagen', 'descripcion_imagen')
+    extra = 3
+    fields = ('tipo', 'orden', 'titulo_bloque', 'contenido_texto', 'url_video', 'imagen', 'descripcion_imagen')
     ordering = ('orden',)
     
     def get_fieldsets(self, request, obj=None):
         fieldsets = (
-            ('Contenido', {
-                'fields': ('tipo', 'orden')
+            ('Configuración del Bloque', {
+                'fields': ('tipo', 'orden', 'titulo_bloque')
             }),
-            ('Texto (si tipo es Texto)', {
-                'fields': ('titulo_texto', 'contenido_texto'),
-                'classes': ('collapse',)
+            ('Contenido de Texto', {
+                'fields': ('contenido_texto',),
             }),
-            ('Video (si tipo es Video)', {
+            ('Contenido de Video', {
                 'fields': ('url_video',),
-                'classes': ('collapse',),
-                'description': 'URL de YouTube (ej: https://www.youtube.com/watch?v=VIDEO_ID)'
+                'description': 'URL de YouTube o Vimeo'
             }),
-            ('Imagen (si tipo es Imagen)', {
+            ('Contenido de Imagen', {
                 'fields': ('imagen', 'descripcion_imagen'),
-                'classes': ('collapse',)
             }),
         )
         return fieldsets

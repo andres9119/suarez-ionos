@@ -4,7 +4,7 @@ from suarez.image_optimizer import OptimizedImageField
 
 class ExperienciaCafetera(models.Model):
     titulo = models.CharField(max_length=200)
-    slug = models.SlugField(max_length=200, unique=False, blank=True, null=True)
+    slug = models.SlugField(max_length=200, unique=True, blank=True, null=True)
     descripcion_breve = models.TextField(blank=True, null=True, help_text="Descripción breve para la lista")
     imagen_principal = OptimizedImageField(upload_to='cafe/imagenes/', max_width=1200, max_height=800, quality=85, create_thumbnail=True, blank=True, null=True)
     imagen_thumbnail = models.ImageField(upload_to='cafe/imagenes/thumbnails/', blank=True, null=True)
@@ -41,9 +41,9 @@ class ContenidoExperiencia(models.Model):
     tipo = models.CharField(max_length=10, choices=TIPO_CHOICES)
     orden = models.IntegerField(default=0, help_text="Orden de presentación (menor número = primero)")
     
-    # Para textos
-    titulo_texto = models.CharField(max_length=200, blank=True, null=True, help_text="Título para bloques de texto")
-    contenido_texto = models.TextField(blank=True, null=True, help_text="Contenido del texto")
+    # Para contenidos (antes titulo_texto)
+    titulo_bloque = models.CharField(max_length=200, blank=True, null=True, help_text="Opcional: Título para esta sección o bloque")
+    contenido_texto = models.TextField(blank=True, null=True, help_text="Contenido del texto (si el tipo es Texto)")
     
     # Para videos
     url_video = models.URLField(blank=True, null=True, help_text="URL de YouTube o Vimeo")
